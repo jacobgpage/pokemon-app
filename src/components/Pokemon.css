@@ -1,0 +1,35 @@
+.Pokemon-display {
+  display: block;
+}
+
+.Pokemon-title {
+  display: inline;
+  font-size: 40px;
+  padding: 40px;
+  vertical-align: top;
+  position: relative;
+  top: 60px;
+}
+
+.Pokemon-description {
+  font-size: 25px;
+  position: relative;
+  top: -350px;
+  right: -515px;
+}
+
+.Pokemon-search {
+  width: 250px;
+  float: right;
+  position: relative;
+  right: 50px;
+}
+
+.MuiDataGrid-root .MuiDataGrid-cell {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+}
+
+.Datagrid {
+  padding-left: 10px;
+}

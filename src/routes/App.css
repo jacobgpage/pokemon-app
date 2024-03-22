@@ -1,0 +1,93 @@
+.App-header {
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 10px;
+  height: 100px;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(255, 0, 0, 0.309),
+      rgba(255, 255, 255, 0.754)
+    ),
+    url("https://storage.ko-fi.com/cdn/useruploads/display/34cfaba3-b720-4599-9945-d026bad8a49f_widescreenthumbnail.png");
+  background-size: cover;
+  color: rgb(246, 246, 246);
+}
+
+.Nav-bar {
+  background-color: gray;
+  height: auto;
+}
+
+.Nav-tab {
+  width: 175px;
+  height: 80px;
+}
+
+.Input-divider {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.Input-field {
+  width: 300px;
+}
+
+.Input-button {
+  height: 55px;
+}
+
+.MuiTabs-indicator {
+  background: #c3c3c3 !important;
+}
+
+.Mui-selected {
+  color: #c3c3c3 !important;
+}
+
+.Title {
+  display: block;
+  font-size: 40px;
+  text-align: center;
+  padding-top: 50px;
+  font-weight: bold;
+}
+
+.Title-image {
+  text-align: center;
+  padding-top: 100px;
+  border-radius: 100px;
+}
+
+.Image {
+  border-radius: 25px;
+}
+
+.Input-fields {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-top: 60px;
+}
+
+.Input-one {
+  padding-bottom: 50px;
+}
+
+.Input-two {
+  padding-bottom: 50px;
+}
+
+.SubHeader {
+  padding-left: 50px;
+}
+
+.Main {
+  padding-left: 10px;
+}
+
+.Error-message {
+  color: red;
+  position: relative;
+  left: -90px;
+  top: -10px;
+}
