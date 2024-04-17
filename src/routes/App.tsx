@@ -1,5 +1,5 @@
 import React from "react";
-import { Tab, Tabs } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
@@ -17,11 +17,42 @@ function App() {
   const { hash, pathname, search } = useLocation();
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Generic Pokemon Website</h1>
-      </header>
-      <div className="Nav-bar">
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "lightgray",
+      }}
+    >
+      <Box
+        sx={{
+          backgroundImage:
+            "url('https://www.cardacademy.co.uk/wp-content/uploads/2021/02/header-2.png')",
+          backgroundSize: "length",
+          backgroundPosition: "center",
+          resize: "both",
+          width: "100%",
+          height: "125px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      ></Box>
+      <Box
+        sx={{
+          backgroundColor: "gray",
+          width: "50vw",
+          display: "flex",
+          justifyContent: "center",
+          minWidth: "500px",
+          borderRadius: "5px",
+          height: "60px",
+          position: "relative",
+          bottom: "12px",
+        }}
+      >
         <Tabs
           value={currentValue}
           textColor="secondary"
@@ -34,28 +65,39 @@ function App() {
             label="Home"
             icon={<HomeIcon />}
             iconPosition="start"
-            href="home"
+            href="#/home"
           />
           <Tab
             className="Nav-tab"
-            label="Pokedex"
+            label="Pokédex"
             icon={<CatchingPokemonIcon />}
             iconPosition="start"
-            href="pokedex"
+            href="#/pokedex"
           />
           <Tab
             className="Nav-tab"
             label="Battle"
             icon={<SportsKabaddiIcon />}
             iconPosition="start"
-            href="/battle"
+            href="#/battle"
           />
         </Tabs>
-      </div>
-      <Outlet />
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: "white",
+          width: "95vw",
+          borderRadius: "10px",
+          marginBottom: "100px",
+        }}
+      >
+        <Outlet />
+      </Box>
 
-      {pathname === "/" ? <Navigate to="/home" replace={true} /> : <p></p>}
-    </div>
+      {pathname === "#/" || pathname === "/" ? (
+        <Navigate to="/home" replace={true} />
+      ) : undefined}
+    </Box>
   );
 }
 

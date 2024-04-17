@@ -2,17 +2,20 @@
 import React, { useState } from "react";
 import Pokemon from "./Pokemon";
 import { openDB } from "idb";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar, urPK } from "@mui/x-data-grid";
 import FetchPokemon from "./FetchPokemon";
 
 import "./Pokemon.css";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import Switch from "@mui/material/Switch";
+import { create } from "domain";
 
 const Pokedex: React.FC = () => {
   const [allRows, setAllRows] = useState<any>();
-
   const [open, setOpen] = React.useState(true);
+  const [showShiny, setShowShiny] = useState<boolean>(false);
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -55,6 +58,14 @@ const Pokedex: React.FC = () => {
     return "";
   };
 
+  const toggleShiny = () => {
+    if (showShiny) {
+      setShowShiny(false);
+    } else {
+      setShowShiny(true);
+    }
+  };
+
   //Gets all pokemon and adds then to rows list to be added to the table
   async function createPokemon() {
     let rows: any = [];
@@ -77,10 +88,15 @@ const Pokedex: React.FC = () => {
           const pokemon: Pokemon = await val.pokemon;
 
           if (pokemon) {
+            let pokemonSprite = pokemon.sprites.front_default;
+            if (showShiny) {
+              pokemonSprite = pokemon.sprites.front_shiny;
+            }
+
             const createdPokemon = {
               id: pokemon.id,
               name: capitalFirstLetter(pokemon.name),
-              image: pokemon.sprites.front_default,
+              image: pokemonSprite,
               description: pokemon.description,
               //Sets the types
               type: pokemon.types
@@ -112,9 +128,19 @@ const Pokedex: React.FC = () => {
 
   createPokemon();
 
+  console.log(showShiny);
+
   return (
     <div>
       <FetchPokemon />
+      <Switch
+        onChange={() => {
+          toggleShiny();
+          setAllRows(null);
+          createPokemon();
+        }}
+      />
+      ⭐
       {allRows ? (
         <DataGrid
           className="Datagrid"
@@ -132,8 +158,8 @@ const Pokedex: React.FC = () => {
               showQuickFilter: true,
             },
           }}
-          sx={{ height: "82vh", width: "100vw" }}
-        ></DataGrid>
+          sx={{ height: "80vh", margin: "5px" }}
+        />
       ) : (
         <>
           <Backdrop
@@ -142,6 +168,24 @@ const Pokedex: React.FC = () => {
           >
             <CircularProgress color="inherit" />
           </Backdrop>
+          <DataGrid
+            className="Datagrid"
+            columns={columns}
+            rows={[]}
+            rowHeight={100}
+            disableColumnFilter
+            disableColumnMenu
+            disableColumnSelector
+            disableDensitySelector
+            disableRowSelectionOnClick
+            slots={{ toolbar: GridToolbar }}
+            slotProps={{
+              toolbar: {
+                showQuickFilter: true,
+              },
+            }}
+            sx={{ height: "80vh", width: "100vw" }}
+          />
         </>
       )}
     </div>
